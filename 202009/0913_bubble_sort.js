@@ -1,47 +1,13 @@
-// export function bubbleSort(arr){
-//     for(var i=0;i<arr.length;i++){
-//         for(let j=i;j<arr.length;j++){
-//             let mid = arr[j]
-//             let next = arr[j+1]
-//             if(mid > next){
-//                 arr[j] = next
-//                 arr[j+1] = mid
-//             }
-//         }
-//     }
-//     return arr
-// }
-sort(originalArray) {
-    // Flag that holds info about whether the swap has occur or not.
-    let swapped = false;
-    // Clone original array to prevent its modification.
-    const array = [...originalArray];
-
-    for (let i = 1; i < array.length; i += 1) {
-      swapped = false;
-
-      // Call visiting callback.
-      this.callbacks.visitingCallback(array[i]);
-
-      for (let j = 0; j < array.length - i; j += 1) {
-        // Call visiting callback.
-        this.callbacks.visitingCallback(array[j]);
-
-        // Swap elements if they are in wrong order.
-        if (this.comparator.lessThan(array[j + 1], array[j])) {
-          [array[j], array[j + 1]] = [array[j + 1], array[j]];
-
-          // Register the swap.
-          swapped = true;
+ function bubbleSort (arr){
+    for(var i = 0; i < arr.length - 1; i++){
+        //决定每一轮比较多少次
+        for(var j = 0; j < arr.length - i - 1; j++){
+            if(arr[j] > arr[j + 1]){
+                var tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
+            }
         }
-      }
-
-      // If there were no swaps then array is already sorted and there is
-      // no need to proceed.
-      if (!swapped) {
-        return array;
-      }
     }
-
-    return array;
-  }
+    return arr
+ }
