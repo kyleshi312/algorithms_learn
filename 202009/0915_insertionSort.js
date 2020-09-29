@@ -21,3 +21,22 @@ function directInsertionSort(array) {
     }
     return array;
   }
+// 优化版
+  function insertSort02(array){
+    let arr = array.slice(0)
+    for(let i=1;i<arr.length;i++){
+      let curIndex = i
+      let cur = arr[i]
+      console.log('cur',cur,'curIndex', curIndex)
+      while(curIndex > 0 && cur < arr[curIndex-1]){
+        console.log('cur',cur,'curIndex', curIndex)
+        // arr[curIndex] = arr[curIndex-1]
+        // arr[curIndex-1] = cur
+        let index = curIndex-1;
+        [arr[curIndex], arr[index]] = [arr[index], cur]
+        curIndex--
+      }
+    }
+    return arr
+
+  }

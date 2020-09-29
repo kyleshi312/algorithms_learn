@@ -1,0 +1,281 @@
+{
+  "rootTopicKey": "42b7dbed-ac07-4849-ace0-47c782822683",
+  "editorRootTopicKey": "42b7dbed-ac07-4849-ace0-47c782822683",
+  "focusKey": "346f15a7-56f6-40ce-b00b-1f36f3bb5d0f",
+  "extData": {},
+  "topics": [
+    {
+      "key": "9c54a4ad-6a66-4546-870f-a98b9ae0c91f",
+      "parentKey": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "replace"
+        },
+        {
+          "type": "DESC",
+          "data": "* 属性 描述$1,$2,…,$99 匹配第 1\\-99 个 分组里捕获的文本\n* $& 匹配到的子串文本\n* $\\` 匹配到的子串的左边文本\n* $' 匹配到的子串的右边文本\n* $$ 美元符号\n\n\n### 把 \"2\\+3=5\"，变成 \"2\\+3=2\\+3=5=5\":\n\n```\nvar result = \"2+3=5\".replace(/=/, \"$&$`$&$'$&\");\nconsole.log(result);\n// => \"2+3=2+3=5=5\"\n\n```\n"
+        }
+      ]
+    },
+    {
+      "key": "346f15a7-56f6-40ce-b00b-1f36f3bb5d0f",
+      "parentKey": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "正则与字符串"
+        },
+        {
+          "type": "DESC",
+          "data": "lastIndex\n有g时\n* 字符串每次匹配不变\n* 正则每次修改，是下一次的起始位置\n\n无g时\n都从0开始\n\n## 正则属性\n\n\n###  使用构造函数需要注意的问题\n\n\n### 一般不推荐使用构造函数生成正则，而应该优先使用字面量。因为用构造函数会多写很多 \\\\。\n\n\n* 修饰符 描述 g 全局匹配，即找到所有匹配的，单词是 global。\n* i 忽略字母大小写，单词是 ingoreCase。 \n* m 多行匹配，只影响 ^ 和 $，二者变成行的概念，即行开头和行结尾。单词是 multiline。\n\n\n\n### source 属性\n\n动态正则，查看构建出的正则\n"
+        }
+      ]
+    },
+    {
+      "key": "33e690f6-dbb9-492e-a9e8-9abadc8cbacf",
+      "parentKey": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "test"
+        },
+        {
+          "type": "DESC",
+          "data": "### 整体匹配时需要使用 ^ 和 $\n\n"
+        }
+      ]
+    },
+    {
+      "key": "f853f12e-2d47-4ccd-a919-8689bef05f22",
+      "parentKey": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "exec"
+        },
+        {
+          "type": "DESC",
+          "data": "解决match 有g选项时的缺陷\nlastIndex\n常需要while配合"
+        }
+      ]
+    },
+    {
+      "key": "b2ad33e5-8096-48e2-aa98-cddb03fea20e",
+      "parentKey": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "search"
+        },
+        {
+          "type": "DESC",
+          "data": "### 会把字符串转换为正则\n\n```\nvar string = \"2017.06.27\";\nconsole.log( string.search(\".\") );\n// => 0\n//需要修改成下列形式之\nconsole.log( string.search(\"\\\\.\") );\nconsole.log( string.search(/\\./) );\n// => 4\n// => 4\nconsole.log( string.match(\".\") );\n// => [\"2\", index: 0, input: \"2017.06.27\"]\n//需要修改成下列形式之一\nconsole.log( string.match(\"\\\\.\") );\nconsole.log( string.match(/\\./) );\n// => [\".\", index: 4, input: \"2017.06.27\"]\n// => [\".\", index: 4, input: \"2017.06.27\"]\nconsole.log( string.split(\".\") );\n// => [\"2017\", \"06\", \"27\"]\nconsole.log( string.replace(\".\", \"/\") );\n// => \"2017/06.27\n\n```\n"
+        }
+      ]
+    },
+    {
+      "key": "158ddf67-1aa8-4584-bc22-d61f0d7571f6",
+      "parentKey": "2cd1b176-40d7-4593-a9d2-46b3e9f729ad",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "匹配/查找"
+        }
+      ]
+    },
+    {
+      "key": "42b7dbed-ac07-4849-ace0-47c782822683",
+      "parentKey": null,
+      "subKeys": [
+        "2cd1b176-40d7-4593-a9d2-46b3e9f729ad",
+        "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "正则编程"
+        }
+      ]
+    },
+    {
+      "key": "6057cc2d-6f0d-4a2e-b452-b7b01e39c933",
+      "parentKey": "2cd1b176-40d7-4593-a9d2-46b3e9f729ad",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "提取"
+        }
+      ]
+    },
+    {
+      "key": "eb1eb93a-3f1f-45f7-85ca-93530c347602",
+      "parentKey": "2cd1b176-40d7-4593-a9d2-46b3e9f729ad",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "切分"
+        }
+      ]
+    },
+    {
+      "key": "2cd1b176-40d7-4593-a9d2-46b3e9f729ad",
+      "parentKey": "42b7dbed-ac07-4849-ace0-47c782822683",
+      "subKeys": [
+        "158ddf67-1aa8-4584-bc22-d61f0d7571f6",
+        "eb1eb93a-3f1f-45f7-85ca-93530c347602",
+        "6057cc2d-6f0d-4a2e-b452-b7b01e39c933",
+        "46f8c058-701d-4bd9-8be6-3be1d007a131"
+      ],
+      "collapse": true,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "四种操作"
+        }
+      ]
+    },
+    {
+      "key": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "parentKey": "42b7dbed-ac07-4849-ace0-47c782822683",
+      "subKeys": [
+        "549470f7-5c24-4f17-a2d1-8c6ca50ef0ef",
+        "b2ad33e5-8096-48e2-aa98-cddb03fea20e",
+        "9c54a4ad-6a66-4546-870f-a98b9ae0c91f",
+        "f6280339-1be8-49e2-b791-be9859a5edee",
+        "f853f12e-2d47-4ccd-a919-8689bef05f22",
+        "33e690f6-dbb9-492e-a9e8-9abadc8cbacf",
+        "346f15a7-56f6-40ce-b00b-1f36f3bb5d0f"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "相关 API"
+        }
+      ]
+    },
+    {
+      "key": "f6280339-1be8-49e2-b791-be9859a5edee",
+      "parentKey": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "split"
+        },
+        {
+          "type": "DESC",
+          "data": "1. 它可以有第二个参数，表示结果数组的最大长度\n1. 正则使用分组时，结果数组中是包含分隔符的：\n\n"
+        }
+      ]
+    },
+    {
+      "key": "549470f7-5c24-4f17-a2d1-8c6ca50ef0ef",
+      "parentKey": "d7b842cc-b088-4747-aaf2-fcdd5bdf39d5",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "match"
+        },
+        {
+          "type": "DESC",
+          "data": "### 会把字符串转换为正则\n\n返回结果的格式问题\n1. 有g\n1. 没有g\n1. 不匹配\n\n"
+        }
+      ]
+    },
+    {
+      "key": "46f8c058-701d-4bd9-8be6-3be1d007a131",
+      "parentKey": "2cd1b176-40d7-4593-a9d2-46b3e9f729ad",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "替换"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "readOnly": false,
+    "allowUndo": true,
+    "layoutDir": 0,
+    "theme": {
+      "name": "default",
+      "randomColor": true,
+      "background": "rgb(57,60,65)",
+      "highlightColor": "#50C9CE",
+      "marginH": 60,
+      "marginV": 20,
+      "contentStyle": {
+        "lineHeight": "1.5",
+        "fontSize": "16px"
+      },
+      "linkStyle": {
+        "lineRadius": 5,
+        "lineType": "curve",
+        "lineWidth": "3px"
+      },
+      "rootTopic": {
+        "contentStyle": {
+          "fontSize": "36px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      },
+      "primaryTopic": {
+        "contentStyle": {
+          "fontSize": "24px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      },
+      "normalTopic": {
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      }
+    }
+  },
+  "formatVersion": "0.0"
+}
