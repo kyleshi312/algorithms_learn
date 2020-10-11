@@ -1,0 +1,181 @@
+{
+  "rootTopicKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+  "editorRootTopicKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+  "focusKey": "edee05bc-ad48-4899-84c3-0735740197a7",
+  "extData": {},
+  "topics": [
+    {
+      "key": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+      "parentKey": null,
+      "subKeys": [
+        "2a7a5d41-b3dc-4be2-8ccf-fbb9052805f9",
+        "84d5439a-98e9-4d35-beea-6243fe68206e",
+        "1d4621a0-3543-4453-87e7-fe6cbb725b1b",
+        "edee05bc-ad48-4899-84c3-0735740197a7",
+        "1e0ef77f-cdb4-4bee-bb03-f5497769f2ee",
+        "d8024100-204f-44f1-8887-0218a1ed5bc1"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "效率"
+        },
+        {
+          "type": "DESC",
+          "data": "### 正则表达式的运行分为如下的阶段：\n\n1. 编译；\n1. 设定起始位置；\n1. 尝试匹配；\n1. 匹配失败的话，从下一位开始继续第 3 步；\n1. 最终结果：匹配成功或失败。\n\n\n"
+        }
+      ]
+    },
+    {
+      "key": "2a7a5d41-b3dc-4be2-8ccf-fbb9052805f9",
+      "parentKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "使用具体型字符组来代替通配符，来消除回溯"
+        },
+        {
+          "type": "DESC",
+          "data": "如果正则用的是：/\".\\*\"/，会在第 3 阶段产生 4 次回溯\n如果正则用的是：/\".\\*?\"/，会产生 2 次回溯\n\n因为回溯的存在，需要引擎保存多种可能中未尝试过的状态，以便后续回溯时使用。注定要占用一定的内存\n1. 第六章 正则表达式的构建 \\| 第 60 页JavaScript 正则表达式迷你书。此时要使用具体化的字符组，来代替通配符.，以便消除不必要的字符，此时使用正则 /\"\\[^\"\\]\\*\"/，即可。\n\n"
+        }
+      ]
+    },
+    {
+      "key": "84d5439a-98e9-4d35-beea-6243fe68206e",
+      "parentKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "使用非捕获型分组"
+        },
+        {
+          "type": "DESC",
+          "data": "因为括号的作用之一是，可以捕获分组和分支里的数据。那么就需要内存来保存它们。\n\n### 当我们不需要使用分组引用和反向引用时，此时可以使用非捕获分组。\n\n 例如，/^\\[\\-\\]?\\(\\\\d.\\\\d\\+\\|\\\\d\\+\\|.\\\\d\\+\\)$/ 可以修改成：/^\\[\\-\\]?\\(?:\\\\d.\\\\d\\+\\|\\\\d\\+\\|.\\\\d\\+\\)$/。"
+        }
+      ]
+    },
+    {
+      "key": "edee05bc-ad48-4899-84c3-0735740197a7",
+      "parentKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "提取分支公共部分"
+        },
+        {
+          "type": "DESC",
+          "data": "比如，/^abc\\|^def/ 修改成 /^\\(?:abc\\|def\\)/。 又比如， /this\\|that/修改成 /th\\(?:is\\|at\\)/。 \n\n### 这样做，可以减少匹配过程中可消除的重复。\n\n"
+        }
+      ]
+    },
+    {
+      "key": "1d4621a0-3543-4453-87e7-fe6cbb725b1b",
+      "parentKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "独立出确定字符"
+        },
+        {
+          "type": "DESC",
+          "data": "例如，/a\\+/ 可以修改成 /aa\\*/。 因为后者能比前者多确定了字符 \"a\"。\n\n### 这样会在第四步中，加快判断是否匹配失败，进而加快移位的速度。\n\n"
+        }
+      ]
+    },
+    {
+      "key": "1e0ef77f-cdb4-4bee-bb03-f5497769f2ee",
+      "parentKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "减少分支的数量，缩小它们的范围"
+        },
+        {
+          "type": "DESC",
+          "data": "/red\\|read/ 可以修改成 /rea?d/。\n\n### 此时分支和量词产生的回溯的成本是不一样的。但这样优化后，可读性会降低的。\n\n"
+        }
+      ]
+    },
+    {
+      "key": "d8024100-204f-44f1-8887-0218a1ed5bc1",
+      "parentKey": "105f9bd1-5d2b-4327-8a11-60ad872d763d",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "本章小结"
+        },
+        {
+          "type": "DESC",
+          "data": "## 针对每种情形，分别写出正则，然用分支把它们合并在一起，再提取分支公共部分，就能得到准确的正则。\n\n"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "readOnly": false,
+    "allowUndo": true,
+    "layoutDir": 0,
+    "theme": {
+      "name": "default",
+      "randomColor": true,
+      "background": "rgb(57,60,65)",
+      "highlightColor": "#50C9CE",
+      "marginH": 60,
+      "marginV": 20,
+      "contentStyle": {
+        "lineHeight": "1.5",
+        "fontSize": "16px"
+      },
+      "linkStyle": {
+        "lineRadius": 5,
+        "lineType": "curve",
+        "lineWidth": "3px"
+      },
+      "rootTopic": {
+        "contentStyle": {
+          "fontSize": "36px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      },
+      "primaryTopic": {
+        "contentStyle": {
+          "fontSize": "24px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      },
+      "normalTopic": {
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      }
+    }
+  },
+  "formatVersion": "0.0"
+}
