@@ -59,10 +59,11 @@
  * }
  */
 /**
- * @param {ListNode} head
- * @param {number} n
- * @return {ListNode}
- */
+//  * @param {ListNode} head
+//  * @param {number} n
+//  * @return {ListNode}
+//  */
+// 双循环
 var removeNthFromEnd = function(head, n) {
     let dumy = new ListNode(0, head)
     dumy.next = head
@@ -78,5 +79,23 @@ var removeNthFromEnd = function(head, n) {
         head = head.next
     }
     head.next = head.next.next
+    return dumy.next
+};
+
+// 双指针
+var removeNthFromEnd = function(head, n) {
+    let dumy = new ListNode(0, head)
+    dumy.next = head
+    let first = dumy
+    let second = dumy
+    for(var i = 0;i<n;i++){
+        first = first.next
+    }
+    while(first && first.next !== null){
+        first = first.next
+        second = second.next
+    }
+    
+    second.next = second.next.next
     return dumy.next
 };
