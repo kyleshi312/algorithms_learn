@@ -18,3 +18,10 @@
    * _path_:`\src\core\index.js`
         * 初始化全局API，劫持prototype的三个属性[initGlobalAPI、defineProperty](./vueSource/core_index.md) - 三个属性：$isServer、$ssrContext、FunctionalRenderContext、Vue.version
         * 
+* **定义Vue构造函数，调用Vue.prototype._init**
+  * _执行如下函数_
+    * initMixin(Vue)
+    * stateMixin(Vue)
+    * eventsMixin(Vue)
+    * lifecycleMixin(Vue)
+    * renderMixin(Vue)
