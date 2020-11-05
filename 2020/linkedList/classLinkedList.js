@@ -86,17 +86,57 @@ class LinkedList{
         return this.head
     }
     remove(element){
+        if(!this.head){
+            return null
+        }
+        let dumy = new Node(0)
+        dumy.next = this.head
 
+        let cur = dumy.next
+        while(cur.next && cur.next.element !== element){
+            cur = cur.next
+        }
+		if(cur.next){
+			cur.next = cur.next.next
+		}
+        return this.head
     }
     indexOf(element){
-
+        let index = 0
+        if(!element)return index = -1
+        if(!this.head)return index = -1
+        let dumy = new Node(0)
+        dumy.next = this.head
+        let cur = dumy
+        while(cur.next && cur.next.element !== element){
+            index++
+            cur = cur.next
+        }
+        if(cur.next.element === element){
+            return index + 1
+        }
+        return index
+    }
+    // return the element where this postion is equal to index
+    elementAt(index){
+        let cur = this.head
+        while(cur.next){
+            if(this.indexOf(cur.element) === index){
+                return cur.element
+            }
+            cur = cur.next
+        }
     }
 }
 var lk = new LinkedList()
+console.log(lk.indexOf(11))
 console.log(lk.push(22))
 console.log(lk.push(22))
-console.log(lk.prepend(122))
+console.log(lk.prepend(122), lk.indexOf(22))
 console.log(JSON.stringify(lk.insertAt(1, 111)))
 console.log(JSON.stringify(lk.removeAt(1)))
 console.log(JSON.stringify(lk.removeAt(1)))
-console.log(lk)
+console.log(JSON.stringify(lk.push(12),lk.indexOf(22)))
+console.log(JSON.stringify(lk.push(13),lk.indexOf(22)))
+console.log(JSON.stringify(lk.push(14),lk.indexOf(22)))
+console.log(JSON.stringify(lk.remove(132),lk.indexOf(14)))
