@@ -1,4 +1,3 @@
-import { Node } from "./basic"
 
 // 实现LinkedList类的相应方法
 /*
@@ -26,11 +25,14 @@ const defaultEquals = function (a, b) {
 }
 
 // export default 
-class linkedList{
+class LinkedList{
     constructor(equalsFn = defaultEquals){
         this.count = 0
         this.head = undefined
         this.equalsFn = equalsFn
+    }
+    getHead(){
+        return this.head
     }
     push (element) {
         let node = new Node(element)
@@ -39,10 +41,10 @@ class linkedList{
             this.head = node
         } else{
             let cur = this.head
-            while(cur !== null){
+            while(cur.next){
                 cur = cur.next
             }
-            cur.next = node 
+            cur.next = node
         }
         this.count++
         return this.head
@@ -77,6 +79,19 @@ class linkedList{
         }
         return cur
     }
-
+    remove(el){
+        let ahead = new Node(0)
+        ahead.next = this.head
+        let cur = ahead
+        while(cur){
+            if(cur.next === el){
+                cur.next = cur.next.next
+            }
+            cur = cur.next
+        }
+    }
+    isEmpty(){
+        return this.count === 0
+    }
 }
 

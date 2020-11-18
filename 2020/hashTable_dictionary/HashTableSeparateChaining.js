@@ -1,15 +1,3 @@
-
-class ValuePair{
-    constructor(key, value){
-        this.key = key
-        this.value = value
-    }
-    toString(){
-        return `[#${this.key}：${this.value}]`
-    }
-}
-
-
 function defaultToString(item) { 
     if (item === null) { 
         return 'NULL'; 
@@ -21,11 +9,21 @@ function defaultToString(item) {
     return item.toString(); // {1} 
 }
 
-class HashTable { 
+class ValuePair{
+    constructor(key, value){
+        this.key = key
+        this.value = value
+    }
+    toString(){
+        return `[#${this.key}：${this.value}]`
+    }
+}
+
+class HashTableSeparateChaining { 
     constructor(toStrFn = defaultToString) { 
         this.toStrFn = toStrFn; 
         this.table = {}; 
-    } 
+    }
     loseloseHashCode(key){
         if(typeof key === 'number'){
             return key
@@ -40,33 +38,50 @@ class HashTable {
     hashCode(key){
         return this.loseloseHashCode(key)
     }
-    // put(key,value)：向散列表增加一个新的项（也能更新散列表）。
     put(key, value){
         if(key != null && value != null){
-            const position = this.hashCode(key)
-            console.log(position, value)
-            this.table[position] = new ValuePair(key, value)
+            const pos = this.hashCode(key)
+            if(!this.table[pos]){
+                this.table[pos] = new LinkedList()
+                this.table[pos].push(new ValuePair(key, value))
+            }else{
+                this.table[pos].push(new ValuePair(key, value))
+            }
             return true
         }
         return false
     }
-    // remove(key)：根据键值从散列表中移除值
-    remove(key){
-        const hash = this.hashCode(key)
-        const valuePair = this.table[hash]
-        if(valuePair){
-            Reflect.deleteProperty(this.table, hash)
-            return true
-        }
-        return false
-    }
-    // get(key)：返回根据键值检索到的特定的值
     get(key){
-        const valuePair = this.table[this.hashCode(key)]
-        return valuePair?valuePair.value : undefined
+        const pos = this.hashCode(key)
+        const linkList = this.table[pos]
+        if(linkList !== null && !linkList.isEmpty()){
+            let current = linkList.getHead()
+            while(current != null){
+                if(current.element.key === key){
+                    return current.element.value
+                }
+                current = current.next
+            }
+        }
+        return undefined
     }
-    isEmpty(){
-        return Object.keys(this.table).length === 0
+    remove(key){
+        const pos = this.hashCode(key)
+        const linkList = this.table[pos]
+        if(linkList !== null && !linkList.isEmpty()){
+            const cur = linkList.getHead()
+            while(cur){
+                if(cur.element.key === key){
+                    linkList.remove(cur.element)
+                    if(linkList.isEmpty()){
+                        Reflect.deleteProperty(this.table, pos)
+                    }
+                    return true
+                }
+                cur = cur.next
+            }
+        }
+        return false
     }
     toString(){
         if(this.isEmpty()){
@@ -79,28 +94,10 @@ class HashTable {
         }
         return objString
     }
-    // 处理冲突的几种方法
-    分离链接
-    线性探查
-    双散列法
+
 }
 
-// test
-// const hash = new HashTable(); 
-// hash.put('Gandalf', 'gandalf@email.com'); 
-// hash.put('John', 'johnsnow@email.com'); 
-// hash.put('Tyrion', 'tyrion@email.com'); 
-// console.log(hash.hashCode('Gandalf') + ' - Gandalf'); 
-// console.log(hash.hashCode('John') + ' - John'); 
-// console.log(hash.hashCode('Tyrion') + ' - Tyrion');
-
-// console.log(hash.get('Gandalf')); // gandalf@email.com 
-// console.log(hash.get('Loiane')); // undefined
-
-// hash.remove('Gandalf'); 
-// console.log(hash.get('Gandalf'));
-
-const hash = new HashTable(); 
+const hash = new HashTableSeparateChaining(); 
 hash.put('Ygritte', 'ygritte@email.com'); 
 hash.put('Jonathan', 'jonathan@email.com'); 
 hash.put('Jamie', 'jamie@email.com'); 

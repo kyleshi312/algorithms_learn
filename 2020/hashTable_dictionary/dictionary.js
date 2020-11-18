@@ -50,6 +50,15 @@ class Dictionary {
         const valuesList = []
         for(let key in this.table){
             if(this.hasKey(key)){
+                valuesList.push(this.table[this.toStrFn(key)].value)
+            }
+        }
+        return valuesList
+    }
+    keyValues(){
+        const valuesList = []
+        for(let key in this.table){
+            if(this.hasKey(key)){
                 valuesList.push(this.table[this.toStrFn(key)])
             }
         }
@@ -100,3 +109,10 @@ console.log(dictionary.keys());
 console.log(dictionary.values()); 
 console.log(dictionary.get('Tyrion'));
 
+console.log(dictionary.keys()); 
+console.log(dictionary.values()); 
+console.log(dictionary.keyValues());
+
+dictionary.forEach((k, v) => { 
+    console.log('forEach: ', `key: ${k}, value: ${v}`); 
+   });
