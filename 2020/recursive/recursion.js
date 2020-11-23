@@ -64,3 +64,51 @@ function fibonacci(n){
 }
 
 console.log('fibonacci(5)', fibonacci(5))
+
+// 递归求斐波那契数， 记忆结果
+function fibonacciSave(n){
+    if(n < 1)return 0
+    if(n<=2)return 1
+    // var obj = {}
+    // var n1 = fibonacciSave(n-1)
+    // var n2 = fibonacciSave(n-2)
+    // if(obj[n-1]){
+    //     n1 = obj[n-1]
+    // }else{
+    //     obj[n-1] = n1
+    // }
+    // if(obj[n-2]){
+    //     n2 = obj[n-2]
+    // }else{
+    //     obj[n-2] = n2
+    // }
+    // return n1 + n2
+    var memo = [0, 1]
+    if(memo[n])return memo[n]
+    return memo[n] = fibonacciSave(n-1) + fibonacciSave(n-2)
+}
+
+console.log('fibonacciSave(5)', fibonacciSave(5))
+console.log('fibonacciSave(10)', fibonacciSave(10))
+
+function fibonacciMemoization(n) { 
+    const memo = [0, 1]; // {1} 
+    const fibonacci = (n) => { 
+    if (memo[n] != null) return memo[n]; // {2} 
+    return memo[n] = fibonacci(n - 1) + fibonacci(n - 2); // {3} 
+    }; 
+    return fibonacci(n);
+}
+console.log('fibonacciMemoization(10)', fibonacciMemoization(10))
+
+function checkTime(func){
+    var a = Math.floor(Math.random() * 100)
+    console.time(a)
+    func(Array.from(arguments).slice(1))
+    console.log(func(Array.from(arguments).slice(1)))
+    console.timeEnd(a)
+}
+
+checkTime(fibonacciMemoization, 25)
+checkTime(fibonacci, 25)
+checkTime(fb, 25)
