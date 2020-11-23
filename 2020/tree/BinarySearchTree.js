@@ -118,9 +118,6 @@ class BinarySearchTree{
             this.searchNode(node.left, key)
         } else {
             console.log('equal to ' , true)
-            return 'testg'
-
-            return 'eeee'
             return true
         }
     }
