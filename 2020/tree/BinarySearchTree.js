@@ -81,14 +81,14 @@ class BinarySearchTree{
 
     // 查找最小值
     min(){
-        return this.minNode()
+        return this.minNode(this.root)
     }
-    minNode(){
-        let cur = this.root;
+    minNode(node){
+        let cur = node;
         while(cur !== null && cur.left !== null){
             cur = cur.left
         }
-        return cur.key
+        return cur
     }
 
     // 查找最大值
@@ -119,6 +119,52 @@ class BinarySearchTree{
         } else {
             console.log('equal to ' , true)
             return true
+        }
+    }
+    getNodeHeight(node){
+        if(node == null)return -1
+        // console.log('getNodeHeight_____-----_____', 
+        //     'this.getNodeHeight(node.left)',
+        //     this.getNodeHeight(node.left),
+        //     'this.getNodeHeight(node.right)',
+        //     this.getNodeHeight(node.right)
+        // )
+        
+        return Math.max(
+            this.getNodeHeight(node.left), this.getNodeHeight(node.right)
+        ) + 1
+    }
+
+    // removeNode
+    remove(key){
+        this.root = this.removeNode(this.root, key)
+    }
+    removeNode(node, key){
+        if(node == null)return null
+        if(key < node.key){
+            node.left = this.removeNode(node.left, key)
+            return node
+        } else if(key > node.key){
+            node.right = this.removeNode(node.right, key)
+            return node
+        } else {
+            if(node.left == null && node.right == null){
+                node = null
+                return null
+            }
+            if(node.left === null){
+                node = node.right
+                return node
+            } else if(node.right === null){
+                node = node.left
+                return node
+            }
+            let aux = this.minNode(node.right)
+            node.key = aux.key
+            console.log('aux', aux)
+            node.right = this.removeNode(node.right, aux.key)
+            console.log('remove node befor', node)
+            return node
         }
     }
 }
@@ -155,3 +201,158 @@ console.log('max')
 console.log(tree.max())
 
 console.log('tree search 25', tree.search(25), tree.searchNode(tree.root, 25))
+function j(obj){
+    if(obj == null)return 'null'
+    return JSON.parse(JSON.stringify(obj))
+}
+console.log('remove 8', tree.remove(8), j(tree))
+console.log('remove 5', tree.remove(5), j(tree))
+console.log('remove 15', tree.remove(15), j(tree))
+
+// 自平衡树
+// Adelson-Velskii-Landi 树
+// AVL树
+// 一种自平衡的二叉搜索树
+// difinition： 任意一个节点的左右两侧子树的高度之差最多为1 
+
+// 平衡因子
+const BalanceFactor = { 
+    UNBALANCED_RIGHT: 1, 
+    SLIGHTLY_UNBALANCED_RIGHT: 2,
+    BALANCED: 3, 
+    SLIGHTLY_UNBALANCED_LEFT: 4, 
+    UNBALANCED_LEFT: 5 
+}
+class AVLTree extends BinarySearchTree{
+    constructor(){
+        super()
+        this.root = null
+    }
+    getNodeHeight(node){
+        if(node == null){
+            return -1
+        }
+        console.log('getNodeHeight', node)
+        let obj = {}
+        if(obj[node] != null){
+            return obj[node]
+        }
+        return obj[node] = Math.max(
+            this.getNodeHeight(node.left),
+            this.getNodeHeight(node.right)
+        ) + 1
+        // return Math.max(
+        //     this.getNodeHeight(node.left),
+        //     this.getNodeHeight(node.right)
+        // ) + 1
+    }
+    getFactor(node){
+        if(!node)return null
+        const height = this.getNodeHeight(node.left) - this.getNodeHeight(node.right)
+        switch(height){
+            case -2:
+                return BalanceFactor.UNBALANCED_RIGHT
+            case -1:
+                return BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
+            case 1:
+                return BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
+            case 2:
+                return BalanceFactor.UNBALANCED_LEFT
+            default:
+                return BalanceFactor.BALANCED
+        }
+    }
+    rotationLL(node){
+        const tmp = node.left
+        node.left = tmp.right
+        tmp.right = node
+        return tmp
+    }
+    rotationRR(node){
+        const tmp = node.right
+        node.right = tmp.left
+        tmp.left = node
+        return tmp
+    }
+    rotationLR(node){
+        node.right = this.rotationLL(node.right)
+        return this.rotationRR(node)
+    }
+    rotationRL(node){
+        node.left = this.rotationRR(node.left)
+        return this.rotationLL(node)
+    }
+    insert(key){
+        this.root = this.insertNode(this.root, key)
+    }
+    insertNode(node, key){
+        if(node == null){
+            return new Node(key)
+        }
+        if(key > node.key){
+            node.right = this.insertNode(node.right, key)
+        } else if(key < node.key){
+            node.left = this.insertNode(node.left, key)
+        } else {
+            return node
+        }
+        const balanceFactor = this.getFactor(node)
+        if(balanceFactor === BalanceFactor.UNBALANCED_RIGHT){
+            if(key < node.right.key){
+                node = this.rotationLR(node)
+            } else {
+                node = this.rotationRR(node)
+            }
+        } else if(balanceFactor === BalanceFactor.UNBALANCED_LEFT){
+            if(key > node.left.key){
+                node = this.rotationRL(node)
+            } else {
+                node = this.rotationLL(node)
+            }
+        }
+        return node
+    }
+    remove(key){
+        this.root = this.removeNode(this.root, key)
+    }
+    removeNode(node, key){
+        console.log(super.removeNode)
+        node = super.removeNode(node, key)
+        console.log('remove after node', node)
+        const balanceFactor = this.getFactor(node)
+        if(balanceFactor === BalanceFactor.UNBALANCED_LEFT){
+            const balanceFactorLeft = this.getFactor(node.left)
+            if(balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT || BalanceFactor.BALANCED){
+                node = this.rotationLL(node)
+            }else {
+                node = this.rotationRL(node)
+            }
+        } else if(balanceFactor === BalanceFactor.UNBALANCED_RIGHT){
+            const balanceFactorRight = this.getFactor(node.right)
+            if(balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT || BalanceFactor.BALANCED){
+                node = this.rotationRR(node)
+            }else{
+                node = this.rotationLR(node)
+            }
+        }
+        return node
+
+    }
+}
+
+let avlTree = new AVLTree()
+avlTree.insert(50)
+avlTree.insert(70)
+avlTree.insert(30)
+avlTree.insert(10)
+avlTree.insert(40)
+avlTree.insert(35)
+
+avlTree.insert(50)
+avlTree.insert(30)
+avlTree.insert(70)
+avlTree.insert(60)
+avlTree.insert(80)
+avlTree.insert(65)
+
+console.log('avlTree', avlTree)
