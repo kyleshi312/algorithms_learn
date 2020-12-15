@@ -3,15 +3,24 @@
 
 // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/
 // 剑指 Offer 32 - II. 从上到下打印二叉树 II
+// 简单
+// 20201208 
 
 // https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
 // 剑指 Offer 54. 二叉搜索树的第k大节点
+// 简单
+// 20201209 
 
 // https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/
 // 剑指 Offer 26. 树的子结构
+// 中等
+// 20201209 
+// 
 
 // https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/
 // 剑指 Offer 55 - II. 平衡二叉树
+// 简单
+// 20201209 
 
 // https://leetcode-cn.com/problems/legal-binary-search-tree-lcci/
 // 面试题 04.05. 合法二叉搜索树
@@ -51,6 +60,7 @@
 
 // https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/
 // 剑指 Offer 27. 二叉树的镜像
+// 简单
 
 // https://leetcode-cn.com/problems/successor-lcci/
 // 面试题 04.06. 后继者
@@ -63,9 +73,11 @@
 
 // https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/
 // 剑指 Offer 34. 二叉树中和为某一值的路径
+// 中等
 
 // https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
 // 剑指 Offer 07. 重建二叉树
+// 中等
 
 // https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/
 // 剑指 Offer 68 - II. 二叉树的最近公共祖先

@@ -41,17 +41,23 @@ class BinarySearchTree{
     //  remove(key)：从树中移除某个键。
 
     // 中序遍历
+    // 参考地址：https://www.cnblogs.com/bigsai/p/11393609.html
     // 是一种以上行顺序访问BST所有节点的遍历方式，也就是以从最小到最大的顺序遍历所有节点
     inOrderTraverse(node, callback){
         this.inOrderTraverseNode(node,callback)
     }
     inOrderTraverseNode(node, callback){
-        if(node !== null){
-            console.log('node.left')
-            this.inOrderTraverseNode(node.left, callback)
-            callback(node.key)
-            console.log('node.right')
+        if(node != null){
+            // console.log('mmid pre', node.key)
+            console.log('inOrderTraverseNode node.left ----------- before')
             this.inOrderTraverseNode(node.right, callback)
+            console.log('inOrderTraverseNode node.left ----------- after')
+            console.log('mmid', node.key)
+            console.log('inOrderTraverseNode node.right ----------- before')
+            this.inOrderTraverseNode(node.left, callback)
+            console.log('inOrderTraverseNode node.right ----------- after')
+            // console.log('mmid after', node.key)
+
         }
     }
 
@@ -59,22 +65,52 @@ class BinarySearchTree{
     preOrderTraverse(node, callback){
         this.preOrderTraverseNode(node, callback)
     }
+    // 先序遍历: recursive
+    // preOrderTraverseNode(node, callback){
+    //     if(node != null){
+    //         // console.log(callback)
+    //         callback(node.key)
+    //         this.preOrderTraverseNode(node.left, callback)
+    //         this.preOrderTraverseNode(node.right, callback)
+    //     }
+    // }
+    // 先序遍历: stack
+    // preOrderTraverseNode(node, callback){
+    //     if(node == null)return
+    //     const stackArr = []
+    //     if(node)stackArr.push(node)
+    //     while(stackArr.length){
+    //         let outputNode = stackArr.pop()
+    //         if(outputNode.right)stackArr.push(outputNode.right)
+    //         if(outputNode.left)stackArr.push(outputNode.left)
+    //         callback(outputNode.key)
+    //     }
+    // }
+    // 先序遍历: 经典解法
     preOrderTraverseNode(node, callback){
-        if(node !== null){
-            callback(node.key)
-            this.preOrderTraverseNode(node.left, callback)
-            this.preOrderTraverseNode(node.right, callback)
+        const stackArr = []
+        while(stackArr.length || node){
+            if(node){
+                callback(node.key)
+                stackArr.push(node)
+                node = node.left
+            } else {
+                node = stackArr.pop()
+                node = node.right
+            }
         }
     }
-
     // 后序遍历：先访问节点的后代节点，在访问节点本身
     postOrderTraverse(node, callback){
         this.postOrderTraverseNode(node, callback)
     }
     postOrderTraverseNode(node, callback){
-        if(node !== null){
+        if(node != null){
+            console.log('postOrderTraverseNode node.left')
             this.postOrderTraverseNode(node.left, callback)
+            console.log('postOrderTraverseNode mid')
             this.postOrderTraverseNode(node.right, callback)
+            console.log('postOrderTraverseNode node.right')
             callback(node.key)
         }
     }
@@ -110,20 +146,20 @@ class BinarySearchTree{
         if(node == null){
             return false
         }
-        console.log('node', node)
+        // console.log('node', node)
         if(node.key < key){
-            console.log(node.right.key, 'right')
+            // console.log(node.right.key, 'right')
             this.searchNode(node.right, key)
         } else if(node.key > key){
             this.searchNode(node.left, key)
         } else {
-            console.log('equal to ' , true)
+            // console.log('equal to ' , true)
             return true
         }
     }
     getNodeHeight(node){
         if(node == null)return -1
-        // console.log('getNodeHeight_____-----_____', 
+        // // console.log('getNodeHeight_____-----_____', 
         //     'this.getNodeHeight(node.left)',
         //     this.getNodeHeight(node.left),
         //     'this.getNodeHeight(node.right)',
@@ -161,53 +197,89 @@ class BinarySearchTree{
             }
             let aux = this.minNode(node.right)
             node.key = aux.key
-            console.log('aux', aux)
+            // console.log('aux', aux)
             node.right = this.removeNode(node.right, aux.key)
-            console.log('remove node befor', node)
+            // console.log('remove node befor', node)
             return node
         }
     }
+    // 第k大的节点
+    kthLargest(root, k) {
+        const dfs = function(node){
+            if(node != null){
+                dfs(node.right)
+                resArr.push(node.key)
+                if(resArr.length >= k)return
+                dfs(node.left)
+            }
+        }
+        let resArr = []
+        res = dfs(root)
+        console.log(resArr)
+        return resArr[k-1]
+    };
+    
 }
 
 const tree = new BinarySearchTree(); 
-tree.insert(11);
+// tree.insert(11);
 
-tree.insert(7); 
-tree.insert(15); 
-tree.insert(5); 
-tree.insert(3); 
-tree.insert(9); 
-tree.insert(8); 
-tree.insert(10); 
-tree.insert(13); 
-tree.insert(12); 
+tree.insert(11);
+tree.insert(1);
+tree.insert(3);
+tree.insert(3);
+tree.insert(9);
+tree.insert(8);
+tree.insert(10);
+tree.insert(13);
+tree.insert(12);
 tree.insert(14); 
 tree.insert(20); 
 tree.insert(18); 
 tree.insert(25);
 
-let consoleNode = function (val){
-    console.log(val)
-}
-tree.inOrderTraverse(tree.root, consoleNode)
-tree.preOrderTraverse(tree.root, consoleNode)
-tree.postOrderTraverse(tree.root, consoleNode)
+console.log('tree 11', tree)
 
+// let consoleNode = function (val){
+//     console.log(val)
+// }
+// var kthLargest = function(root, k) {
+//     const dfs = function(node){
+//         if(node == null){
+//             return
+//         }
+//         dfs(node.right)
+//         console.log('key', node.key)
+//         resArr.push(node.key)
+//         // if(resArr.length >= k)return
+//         dfs(node.left)
+//     }
+//     let resArr = []
+//     console.log('resArr', resArr)
+//     res = dfs(root)
+//     return resArr[k-1]
+// };
+// console.log('kth 2', kthLargest(tree.root, 2))
+// console.log('tree', tree.root)
+// tree.inOrderTraverse(tree.root, consoleNode)
+// tree.preOrderTraverse(tree.root, consoleNode)
+// tree.postOrderTraverse(tree.root, consoleNode)
+// console.log('tree root', tree.root)
 // min
-console.log('min')
-console.log(tree.min())
+// console.log('min')
+// console.log(tree.min())
 
-console.log('max')
-console.log(tree.max())
+// console.log('max')
+// console.log(tree.max())
 
-console.log('tree search 25', tree.search(25), tree.searchNode(tree.root, 25))
+// console.log('tree search 25', tree.search(25), tree.searchNode(tree.root, 25))
 function j(obj){
     if(obj == null)return 'null'
     return JSON.parse(JSON.stringify(obj))
 }
-console.log('remove 8', tree.remove(8), j(tree))
-console.log('remove 5', tree.remove(5), j(tree))
-console.log('remove 15', tree.remove(15), j(tree))
+// console.log('remove 8', tree.remove(8), j(tree))
+// console.log('remove 5', tree.remove(5), j(tree))
+// console.log('remove 15', tree.remove(15), j(tree))
 
 // 自平衡树
 // Adelson-Velskii-Landi 树
@@ -232,7 +304,7 @@ class AVLTree extends BinarySearchTree{
         if(node == null){
             return -1
         }
-        console.log('getNodeHeight', node)
+        // console.log('getNodeHeight', node)
         let obj = {}
         if(obj[node] != null){
             return obj[node]
@@ -316,9 +388,9 @@ class AVLTree extends BinarySearchTree{
         this.root = this.removeNode(this.root, key)
     }
     removeNode(node, key){
-        console.log(super.removeNode)
+        // console.log(super.removeNode)
         node = super.removeNode(node, key)
-        console.log('remove after node', node)
+        // console.log('remove after node', node)
         const balanceFactor = this.getFactor(node)
         if(balanceFactor === BalanceFactor.UNBALANCED_LEFT){
             const balanceFactorLeft = this.getFactor(node.left)
