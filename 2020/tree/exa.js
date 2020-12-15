@@ -61,7 +61,7 @@ function isBalanced(root) {
     // if(a === 'unbalance')return false
     // return true
     if(root.left == root.right)return true
-     Math.abs(depth(root.left) - depth(root.right)) <= 1 
+     Math.abs(depth(root.left) - depth(root.right)) <= 1?true:false
      isBalanced(root.left) 
      isBalanced(root.right)
 };  
