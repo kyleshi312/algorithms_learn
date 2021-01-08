@@ -89,7 +89,7 @@ console.log('shortestPathA', shortestPathA)
 // const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']; // {12} 
 // distances: [A: 0, B: 1, C: 1, D: 1, E: 2, F: 2, G: 2, H: 2 , I: 3], 
 // predecessors: [A: null, B: "A", C: "A", D: "A", E: "B", F: "B", G: "C", H: "D", I: "E"]
-// const fromVertex = myVertices[0]; // {9} 
+const fromVertex = myVertices[0]; // {9} 
 for (i = 1; i < myVertices.length; i++) { // {10} 
     const toVertex = myVertices[i]; // {11} 
     const path = new Stack(); // {12} 
@@ -105,3 +105,76 @@ for (i = 1; i < myVertices.length; i++) { // {10}
     } 
     console.log(s); // {19} 
 }
+const depthFirstSearch = (graph, callback) => {
+    const vertices = graph.getVertices()
+    const adjList = graph.getAdjList()
+    const color = initializeColor(vertices)
+    for(let vertex of vertices){
+        if(color[vertex] === Colors.WHITE){
+            depthFirstSearchVisit(vertex, color, adjList, callback)
+        }
+    }
+}
+
+const depthFirstSearchVisit = (vertex, color, adjList, callback) => {
+    color[vertex] = Colors.GREY
+    if(callback){
+        callback(vertex)
+    }
+    const neighbors = adjList.get(vertex)
+    for(let n of neighbors){
+        if(color[n] === Colors.WHITE){
+            depthFirstSearchVisit(n, color, adjList, callback)
+        }
+    }
+    color[vertex] = Colors.BLACK
+}
+depthFirstSearch(graph, printVertex);
+
+
+
+
+
+
+
+
+// const DFS = graph => { 
+//     const vertices = graph.getVertices(); 
+//     const adjList = graph.getAdjList(); 
+//     const color = initializeColor(vertices); 
+//     const d = {}; 
+//     const f = {}; 
+//     const p = {}; 
+//     const time = { count : 0}; // {1} 
+//         for (let i = 0; i < vertices.length; i++) { // {2} 
+//             f[vertices[i]] = 0; 
+//             d[vertices[i]] = 0; 
+//             p[vertices[i]] = null; 
+//         } 
+//         for (let i = 0; i < vertices.length; i++) { 
+//             if (color[vertices[i]] === Colors.WHITE) { 
+//                 DFSVisit(vertices[i], color, d, f, p, time, adjList); 
+//             } 
+//         } 
+//         return { // {3} 
+//             discovery: d, 
+//             finished: f, 
+//             predecessors: p 
+//         }; 
+//    }; 
+//    const DFSVisit = (u, color, d, f, p, time, adjList) => { 
+//         color[u] = Colors.GREY; 
+//         d[u] = ++time.count; // {4} 
+//         const neighbors = adjList.get(u); 
+//         for (let i = 0; i < neighbors.length; i++) { 
+//             const w = neighbors[i]; 
+//             if (color[w] === Colors.WHITE) { 
+//                 p[w] = u; // {5} 
+//                 DFSVisit(w, color, d, f, p, time, adjList); 
+//             } 
+//         } 
+//         color[u] = Colors.BLACK; 
+//         f[u] = ++time.count; // {6} 
+//    };
+
+//    console.log('DFS(graph)', DFS(graph))
