@@ -69,4 +69,5 @@ graph.addEdge('E', 'I');
 
 console.log('graph', JSON.parse(JSON.stringify(graph)))
 console.log('graph tostring', graph.toString())
-
+// dist = [INF,INF,INF,INF,INF,INF,INF,]
+// visited = [false,false,false,false,false,false,]
