@@ -50,6 +50,48 @@
 
 // https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
 // 剑指 Offer 32 - III. 从上到下打印二叉树 III
+// 解决方法： 
+// BFS： -------------------
+// var levelOrder = function(root) {
+//     if(root == null)return []
+//     const treeArr = []
+//     const res = []
+//     treeArr.push(root)
+//     while(treeArr.length){
+//         let tmp = []
+//         const len = treeArr.length
+//         for(let i=0;i< len;i++){
+//             let node = treeArr.shift()
+//             tmp.push(node.val)
+//             if(node.left)treeArr.push(node.left)
+//             if(node.right)treeArr.push(node.right)
+//         }
+//         res.push(tmp)
+//     }
+//     return res
+// };
+// DFS --------------
+// var levelOrder = function(root) {
+//     if(root == null)return []
+//     const self = {
+//         treeArr: [],
+//         visited: []
+//     }
+//     // self.visited = []
+//     DFS(self, root, 0)
+//     return self.treeArr
+// }
+// const DFS = (self, root, level) => {
+//     if(root === null)return
+//     if(self.visited.includes(root.val))return
+//     if(self.treeArr.length < level + 1){
+//         self.treeArr.push([])
+//     }
+//     self.treeArr[level].push(root.val)
+//     self.visited.push(root.val)
+//     DFS(self, root.left, level + 1)
+//     DFS(self, root.right, level + 1)
+// }
 
 // https://leetcode-cn.com/problems/first-common-ancestor-lcci/
 // 面试题 04.08. 首个共同祖先

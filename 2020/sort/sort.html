@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>sort</h1>
+    <script src="./sortWhole.js"></script>
+    <script>
+        function createNonSortedArray(size) { // 6 
+        const array = []; 
+        for (let i = size; i > 0; i--) { 
+        array.push(i); 
+        } 
+        return array; 
+        } 
+        let array = createNonSortedArray(4); // {7} 
+        console.log(array.join()); // {8} 
+        // array = bubbleSort(array); // {9} 
+        // array = selectionSort(array); // {9} 
+        array = insertionSort(array); // {9} 
+        console.log('insertionSort', array.join()); //{10}    
+
+
+</script>
+</body>
+</html>
