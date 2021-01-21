@@ -12,7 +12,7 @@
         function createNonSortedArray(size) { // 6 
         const array = []; 
         for (let i = size; i > 0; i--) { 
-        array.push(i); 
+        array.push(i + Math.floor(Math.random() * 10)); 
         } 
         return array; 
         } 
@@ -20,8 +20,8 @@
         console.log(array.join()); // {8} 
         // array = bubbleSort(array); // {9} 
         // array = selectionSort(array); // {9} 
-        array = insertionSort(array); // {9} 
-        console.log('insertionSort', array.join()); //{10}    
+        array = radixSort(array); // {9} 
+        console.log('radixSort', array.join()); //{10}    
 
 
 </script>
