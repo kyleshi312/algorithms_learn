@@ -112,24 +112,26 @@ const merge = function(left, right){
 
 // 快速排序
 
-const quickSort = function(arr){
-    const { length } = arr
-    if(length <= 1)return arr
-    const mid = Math.floor(length / 2)
-    const leftArr = [],
-        rightArr = []
-    for(let i=0; i<length; i++){
-        if(arr[i] > arr[mid]){
-            rightArr.push(arr[i])
-        } else{
-            leftArr.push(arr[i])
-        }
-    }
-    console.log('leftArr', leftArr)
-    console.log('rightArr', rightArr)
-    // return quickSort(leftArr).concat(arr[mid], quickSort(rightArr))
-    return quickSort(leftArr).concat(quickSort(rightArr))
-}
+// const quickSort = function(arr){
+//     console.log('arr ----------- ', arr)
+//     if(arr.length <= 1)return arr
+//     const mid = Math.floor(arr.length / 2)
+//     const leftArr = [],
+//         rightArr = []
+//     for(let i=0; i<arr.length; i++){
+//         console.log('ii, mid',arr[i], arr[mid])
+//         if(arr[i] > arr[mid]){
+//             rightArr.push(arr[i])
+//         } else if(arr[i] < arr[mid]){
+//             leftArr.push(arr[i])
+//         }
+//     }
+//     console.log('leftArr', leftArr)
+//     console.log('rightArr', rightArr)
+//     console.log('quickSort(leftArr).concat(mid, quickSort(rightArr))', quickSort(leftArr).concat(mid, quickSort(rightArr)))
+//     // return quickSort(leftArr).concat(arr[mid], quickSort(rightArr))
+//     return quickSort(leftArr).concat(mid, quickSort(rightArr))
+// }
 // [6, 5, 4, 3, 2, 1]
 // mid: 3
 // leftArr: [2, 1]
@@ -144,44 +146,65 @@ const quickSort = function(arr){
 // rightArr: [6]
 
 // [1, 2] [4, 5, 6]
+const swap = function(arr, i, j){
+    let temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+}
+const defaultCompare = function(a, b){
+    if(a>b){
+        return 1
+    } else if(a<b){
+        return -1
+    } else{
+        return 0
+    }
+}
+const Compare = {
+    BIGGER_THAN: 1,
+    LESS_THAN: -1,
+    EQUAL_THAN: 0,
+}
+function quickSort(array, compareFn = defaultCompare) { 
+    return quick(array, 0, array.length - 1, compareFn); 
+};
 
-// function quickSort(array, compareFn = defaultCompare) { 
-//     return quick(array, 0, array.length - 1, compareFn); 
-// };
+function quick(array, left, right, compareFn) { 
+    let index; // {1} 
+    if (array.length > 1) { // {2} 
+        index = partition(array, left, right, compareFn); // {3} 
+        console.log('index', index, '----arr', array)
+        console.log('left', left)
+        console.log('right', right)
+        if (left < index - 1) { // {4} 
+            quick(array, left, index - 1, compareFn); // {5} 
+        } 
+        if (index < right) { // {6} 
+            quick(array, index, right, compareFn); // {7} 
+        } 
+    } 
+    return array; 
+};
 
-// function quick(array, left, right, compareFn) { 
-//     let index; // {1} 
-//     if (array.length > 1) { // {2} 
-//         index = partition(array, left, right, compareFn); // {3} 
-//         if (left < index - 1) { // {4} 
-//             quick(array, left, index - 1, compareFn); // {5} 
-//         } 
-//         if (index < right) { // {6} 
-//             quick(array, index, right, compareFn); // {7} 
-//         } 
-//     } 
-//     return array; 
-// };
-
-// function partition(array, left, right, compareFn) { 
-//     const pivot = array[Math.floor((right + left) / 2)]; // {8} 
-//     let i = left; // {9} 
-//     let j = right; // {10} 
-//     while (i <= j) { // {11} 
-//         while (compareFn(array[i], pivot) === Compare.LESS_THAN) { // {12} 
-//             i++; 
-//         } 
-//         while (compareFn(array[j], pivot) === Compare.BIGGER_THAN) { // {13} 
-//             j--; 
-//         } 
-//         if (i <= j) { // {14} 
-//             swap(array, i, j); // {15} 
-//             i++; 
-//             j--; 
-//         } 
-//     } 
-//     return i; // {16} 
-// }
+function partition(array, left, right, compareFn) { 
+    const pivot = array[Math.floor((right + left) / 2)]; // {8} 
+    let i = left; // {9} 
+    let j = right; // {10} 
+    while (i <= j) { // {11} 
+        while (compareFn(array[i], pivot) === Compare.LESS_THAN) { // {12} 
+            i++; 
+        } 
+        while (compareFn(array[j], pivot) === Compare.BIGGER_THAN) { // {13} 
+            j--; 
+        } 
+        if (i <= j) { // {14} 
+            swap(array, i, j); // {15} 
+            i++; 
+            j--; 
+        } 
+    } 
+    return i; // {16} 
+}
 
 // 计数排序
 
