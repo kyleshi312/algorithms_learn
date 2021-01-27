@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Math.pow(4, 2)
+        // Math.pow(5, 2)
+        // Math.pow(7, 2)
+        // 
+        function makePower(power){
+            return function(num){
+                return Math.pow(num, power)
+            }
+        }
+        // 求平方
+        let power2 = makePower(2)
+        let power3 = makePower(3)
+        let power4 = makePower(4)
+        console.log(power2(4))
+        console.log(power3(4))
+        console.log(power4(4))
+    </script>
+</body>
+</html>

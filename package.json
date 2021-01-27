@@ -1,0 +1,22 @@
+{
+  "name": "algorithms_learn",
+  "version": "1.0.0",
+  "description": "a rep for learning algorithms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyleshi312/algorithms_learn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyleshi312/algorithms_learn/issues"
+  },
+  "homepage": "https://github.com/kyleshi312/algorithms_learn#readme",
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
+}
