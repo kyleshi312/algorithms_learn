@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>四段代码如下所⽰，点击div .text1 与点击div.text2,打印结果为？</h1>
+    <div class="text1">  
+        text1
+         <div class="text2"> 
+             text2
+    </div>
+    
+     <label> 
+          Click me 
+           <input type="text"> 
+         </label>
+    <script>
+        // document.querySelector('.text1').addEventListener('click',function(){ 
+        //     console.log(1) 
+        //  }) 
+        //  document.querySelector('.text2').addEventListener('click',function(){ 
+        //       console.log(2) 
+        //      })
+        // console.log('text1 2,1')
+        // console.log('text2 1')
+
+        // document.querySelector('.text1').addEventListener('click',function(){ 
+        //     console.log(1) 
+        //  }, true) 
+        //  document.querySelector('.text2').addEventListener('click',function(){ 
+        //       console.log(2) 
+        //      }, true)
+        // console.log('click text1 1')
+        // console.log('text2 1 2')
+        // document.querySelector('.text1').addEventListener('click',function(){ 
+        //     console.log(1) 
+        //  }) 
+        //  document.querySelector('.text2').addEventListener('click',function(){ 
+        //       console.log(2) 
+        //      }, true)
+        // console.log('click text1 1')
+        // console.log('text2 2  1')
+        // document.querySelector('.text1').addEventListener('click',function(){ 
+        //     console.log(1) 
+        //  }, true) 
+        //  document.querySelector('.text2').addEventListener('click',function(){ 
+        //       console.log(2) 
+        //      })
+        // console.log('click text1   1')
+        // console.log('text2 1, 2')
+        document.querySelector('label').addEventListener('click',function () { 
+             console.log(1) 
+             }) 
+              document.querySelector('input').addEventListener('click',function () { 
+                   console.log(2)
+                 })
+    </script>
+</body>
+</html>

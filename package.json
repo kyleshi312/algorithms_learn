@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kyleshi312/algorithms_learn#readme",
   "dependencies": {
+    "folktale": "^2.3.2",
     "lodash": "^4.17.20"
   }
 }
