@@ -40,6 +40,7 @@ const fibForUpdate = function(n){
 }
 
 // 凑零钱问题
+// const coins = [1]
 const coins = [1, 3, 5]
 const dp = function(n){
     if(n === 0)return 0
