@@ -51,16 +51,33 @@
 function p1 (){
     return new MyPromise(function(resolve, reject){
         setTimeout(function(){
-            resolve('p1')
+            reject('p1')
         }, 2000)
     })
 }
-// function p2(){
-//     return new MyPromise(function(resolve, reject){
-//         resolve('p2')
-//     })
-// }
+function p2(){
+    return new MyPromise(function(resolve, reject){
+        reject('p2 reject')
+    })
+}
 
 // MyPromise.all(['a', 'b', p1(), p2()]).then(res => console.log(res))
-MyPromise.resolve(2).then(val => console.log(val))
-MyPromise.resolve(p1()).then(val => console.log(val))
+// MyPromise.resolve(2).then(val => console.log(val))
+// MyPromise.resolve(p1()).then(val => console.log(val))
+// finally 
+// 1. callback
+// 2. then
+p2().then(() => {
+
+}, (r) => {
+    console.log('p2---', r)
+})
+p2().finally(() => {
+    console.log('finally', val)
+    return p1()
+})
+.then((val) => {
+    console.log('then val', val)
+}, (reason) => {
+    console.log('reason 11111', reason)
+})
