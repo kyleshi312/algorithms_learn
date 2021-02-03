@@ -190,24 +190,27 @@ const { includes, startsWith, endsWith } = require("lodash");
 // s.clear()
 // s.forEach(i => console.log(i, s.has(i),s.delete(i)), s)
 
-const obj = {
-}
+// const obj = {
+// }
 
-obj[true] = 'value'
-obj[123] = 'value'
-obj[{a:1}] = 'value'
-console.log(obj)
+// obj[true] = 'value'
+// obj[123] = 'value'
+// obj[{a:1}] = 'value'
+// console.log(obj)
 
-const m = new Map()
-m.set({a: 1}, 2)
-m.set(true, 2)
-console.log(m , m.has(true))
+// const m = new Map()
+// m.set({a: 1}, 2)
+// m.set(true, 2)
+// console.log(m , m.has(true))
 
-m.forEach((value, key) => console.log(value, key))
+// m.forEach((value, key) => console.log(value, key))
 
-const cache = {}
-cache['foo'] = Math.random()
+// const cache = {}
+// cache['foo'] = Math.random()
 
-cache['foo'] = Math.random()
-cache[Symbol('ssss')] = 1
-console.log(cache)
+// cache['foo'] = Math.random()
+// cache[Symbol('ssss')] = 1
+// console.log(cache)
+
+var a = [555, 444]
+for(let (key, val) of a)
