@@ -212,5 +212,44 @@ const { includes, startsWith, endsWith } = require("lodash");
 // cache[Symbol('ssss')] = 1
 // console.log(cache)
 
-var a = [555, 444]
-for(let (key, val) of a)
+// var a = [555, 444]
+// for(let (key, val) of a)
+
+// [Symbol.iterator]: function(){
+//     const all =[...this.]
+// }
+
+// function* foo(){
+//     console.log('zce')
+//     return 100
+// }
+// function *foo(){
+//     console.log('111')
+//     yield 100
+//     console.log(2222)
+//     yield 200
+//     console.log(3333)
+//     yield 300
+// }
+// let a = foo()
+// a.next()
+// a.next()
+// a.next()
+
+// function * createIdMaker(){
+//     let id = 1
+//     while(true){
+//         yield id++
+//     }
+// }
+// const idMaker = createIdMaker(
+// )
+// console.log(idMaker.next())
+// console.log(idMaker.next())
+// console.log(idMaker.next())
+
+// const todo = {
+//     life: ['eat', 'drink']
+// }
+
+new Array().includes('')
