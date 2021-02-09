@@ -21,9 +21,14 @@ function fn(){
 }
 fn()
 
-
-
-
-
-
+// 引用计数的缺点
 // 对象之间循环引用
+// 从全局找不到，但是内部有引用，引用计数无法操作
+// 
+function fn(){
+    const obj1= {}
+    const obj2= {}
+    obj1.n =obj2
+    obj2.n = obj1
+}
+fn()
