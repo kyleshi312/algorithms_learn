@@ -14,3 +14,6 @@ a rep for learning algorithms
 
 * 掘金[前端该如何准备数据结构和算法](https://juejin.im/post/6844903919722692621#heading-51) - 告诉你重要性和怎么开始自己学习生涯
 * github[前端如何从零基础准备数据结构与算法](https://github.com/yangyang1900/Data-Structure-and-Algorithms) - 前端如何从零基础准备数据结构与算法
+
+**程序员的通信知识**
+* 
