@@ -10,18 +10,43 @@ module.exports = {
   },
   // devtool: 'inline-source-map',
   
-  //  devServer: {
-  //    contentBase: './dist',
-  //    proxy: {
-  //      '/api': {
-  //        target: 'https://api.github.com',
-  //         pathRewrite: {
-  //           '^/api': ''
-  //         },
-  //         changeOrigin: true
-  //      }
-  //    }
-  //  },
+   devServer: {
+    //  contentBase: './public',
+     proxy: {
+       '/api': {
+         target: 'https://api.github.com',
+          pathRewrite: {
+            '^/api': ''
+          },
+          changeOrigin: true
+       }
+     }
+   },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    // publicPath: 'dist'
+  },
+  module: {
+    rules: [
+      {
+        test: /.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+
+      {
+        test: /.jpg$/,
+        use: 
+            {
+                loader: 'url-loader', 
+            }
+        
+    }
+]
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -29,24 +54,5 @@ module.exports = {
       template: './src/index.html'
     })
   ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: 'dist'
-  },
-  module: {
-    rules: [
-      {
-        test: /.jpg$/,
-        use: [
-            {
-                loader: 'file-loader'
-            },
-            {
-                loader: 'url-loader', 
-            }
-        ]
-    }
-]
-  }
+
 };
