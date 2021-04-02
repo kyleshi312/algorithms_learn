@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputData">
+        {{ text }}
+    </div>
+    <script src="./js/Dep.js"></script>
+    <script src="./js/watcher.js"></script>
+    <script src="./js/compiler.js"></script>
+    <script src="./js/observer.js"></script>
+    <script src="./js/vue.js"></script>
+    <script>
+        let a = document.querySelector('#app').childNodes
+        let vm = new Vue({
+            el: document.querySelector('#app'),
+            data: {
+                inputData: 1333,
+                text: 'this is text',
+            }
+        })
+        // document.querySelector('input').value = 1
+        console.log(vm)
+    </script>
+</body>
+</html>
