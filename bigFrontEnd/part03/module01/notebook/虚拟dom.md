@@ -128,9 +128,15 @@ import { init } from 'snabdom/build/package/init'
 ### 如何学习源码
 * 宏观了解
 * 带着目标看源码
+  * 核心执行过程
+  * vnode 如何创建
+  * vnode 如何工作
 * 看源码的过程要不求甚解
+  * 主线功能
 * 调试
+  * 用demo
 * 参考资料
+  * 别人文章
 
 ### Snabbdom 的核心
 * init() 设置模块，创建 patch() 函数
@@ -165,6 +171,10 @@ new Vue({
 * 函数重载-参数个数
 * 函数重载-参数类型
 * 常用快捷键
+  * alt + 左
+  * ctrl + left
+  * alt + right
+  * 
 * VNode
 * patch 整体过程分析
 
