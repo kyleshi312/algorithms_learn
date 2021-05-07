@@ -9,6 +9,9 @@
 <body>
     <div id="app">
         <input type="text" v-model="inputData">
+        <div>inputData：{{inputData}}</div>
+        <div v-html="hdata"></div>
+        <div v-on:click="clickme">click me</div>
         {{ text }}
     </div>
     <script src="./js/Dep.js"></script>
@@ -23,6 +26,10 @@
             data: {
                 inputData: 1333,
                 text: 'this is text',
+                hdata: '<h1>this is h1</h1>'
+            },
+            clickme(){
+                console.log('click me success')
             }
         })
         // document.querySelector('input').value = 1

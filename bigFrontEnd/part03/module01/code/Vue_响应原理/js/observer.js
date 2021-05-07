@@ -19,7 +19,7 @@ class Observer{
             configurable: true,
             get(){
                 Dep.target && dep.addSub(Dep.target)
-                console.log('dep', dep)
+                // console.log('dep', dep)
                 return val
             },
             set(newVal){

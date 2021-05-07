@@ -7,10 +7,10 @@ class Compiler{
     compile(el){
         let childNodes  = el.childNodes
         Array.from(childNodes).forEach(node => {
-            // 文本节点
             if(this.isElementNode(node)){
                 this.compileElement(node)
             } else if(this.isTextNode(node)){
+                // 文本节点
                 this.compileText(node)
             }
             
@@ -27,11 +27,25 @@ class Compiler{
             if(this.isDirective(attrName)){
                 attrName = attrName.substr(2)
                 let key = attr.value
-                this.update(node, key, attrName)
+                const attrNames = attrName.split(':')
+                if(attrNames?.length>1){
+                    this.addEListener(node, key, attrNames)
+                } else {
+                    this.update(node, key, attrName)
+                }
             } else {
                 console.log('attrrtt', attrName)
             }
         })
+    }
+    addEListener(node, key, attrNames){
+        const _t = this
+        //传递参数处理
+        console.log('click -------', node, key, attrNames)
+        // no params
+        node.addEventListener(attrNames[1], function(){
+            _t.vm.$options[key]()
+        }, false)
     }
     update(node, key, attrName){
         let updateFn = this[attrName + 'Updater']
@@ -43,9 +57,17 @@ class Compiler{
             node.textContent = newValue
         })
     }
+    htmlUpdater(node,value, key){
+        node.innerHTML = value
+        new Watcher(this.vm, key, (newValue) => {
+            node.innerHTML = newValue
+        })
+    }
+    onUpdater(node,value, key){
+        node.addEventListener(value,  )
+    }
     modelUpdater(node, val, key){
         node.value = val
-        console.log('modelUpdate', node)
         new Watcher(this.vm, key, (newValue) => {
             node.value = newValue
         })
@@ -54,22 +76,25 @@ class Compiler{
             this.vm[key] = node.value
         })
     }
-
+    
     compileText(node){
-        const reg = /\{\{(.+?)\}\}/
+        const reg = /\{\{(.+?)\}\}/g
         let val = node.textContent
+        // const matches = val.matchAll(reg)
+        // console.log('matches', matches)
         if(reg.test(val)){
             let key = RegExp.$1.trim()
+            console.log('match', val.match(reg))
             node.textContent = val.replace(reg, this.vm[key])
             // create watcher obj when data change ,view update
-
+            console.log('node.textContent', node.textContent, val)
             new Watcher(this.vm, key, (newValue) => {
-                node.textContent = newValue
+                node.textContent = val.replace(reg, newValue)
             })
         }
     }
     isDirective(attrName){
-        console.log('isDirective', `${JSON.stringify(attrName)}`, `${attrName}`.startsWith('v-'))
+        // console.log('isDirective', `${JSON.stringify(attrName)}`, `${attrName}`.startsWith('v-'))
         return `${attrName}`.startsWith('v-')
     }   
 
